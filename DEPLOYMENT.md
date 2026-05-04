@@ -15,7 +15,25 @@
 
 ## Deployment to Metropolia
 
-### Using SFTP (Recommended - Password Authentication)
+### Option 1: Using Automated Script (Easiest)
+
+**Windows:**
+```bash
+.\deploy.bat
+```
+
+**Linux/Mac:**
+```bash
+bash deploy.sh
+```
+
+The script will:
+- Build the app
+- Connect to Metropolia via SFTP
+- Create deployment directory
+- Upload all files
+
+### Option 2: Manual SFTP Deployment
 
 1. Open your terminal/PowerShell
 2. Run this command:
