@@ -16,10 +16,10 @@ This project implements React Router for multi-page navigation with the followin
 
 ## Building for Production
 
-Before building for production, update `vite.config.mjs` and replace `your-username` with your Metropolia username:
+Before building for production, update `vite.config.mjs` and replace `elmomal` with your Metropolia username:
 
 ```javascript
-base: '/~your-username/wsk-routing/',
+base: '/~elmomal/wsk-routing/',
 ```
 
 Then build and deploy:
@@ -31,7 +31,7 @@ npm run build
 Copy the contents of the `dist/` folder to your Metropolia public_html directory:
 
 ```bash
-scp -r dist/* your-username@shell.metropolia.fi:~/public_html/wsk-routing/
+scp -r dist/* elmomal@shell.metropolia.fi:~/public_html/wsk-routing/
 ```
 
-Open [Deployed app](https://users.metropolia.fi/~your-username/wsk-routing/) to view it in the browser.
+Open [Deployed app](https://users.metropolia.fi/~elmomal/wsk-routing/) to view it in the browser.
