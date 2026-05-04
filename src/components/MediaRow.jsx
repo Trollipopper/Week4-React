@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const MediaRow = ({ item }) => {
+const MediaRow = ({item}) => {
   return (
     <tr>
       <td>
