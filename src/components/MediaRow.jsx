@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 
-const MediaRow = ({item}) => {
+const MediaRow = ({item, selectedItem, setSelectedItem}) => {
+  const isSelected = selectedItem?.media_id === item.media_id;
+
   return (
     <tr>
       <td>
@@ -11,6 +13,11 @@ const MediaRow = ({item}) => {
       <td>{new Date(item.created_at).toLocaleString('fi-FI')}</td>
       <td>{item.filesize.toLocaleString()}</td>
       <td>{item.media_type}</td>
+      <td>
+        <button type="button" onClick={() => setSelectedItem(item)}>
+          {isSelected ? 'Open' : 'View'}
+        </button>
+      </td>
     </tr>
   );
 };
@@ -27,6 +34,10 @@ MediaRow.propTypes = {
     description: PropTypes.string,
     created_at: PropTypes.string,
   }).isRequired,
+  selectedItem: PropTypes.shape({
+    media_id: PropTypes.number,
+  }),
+  setSelectedItem: PropTypes.func.isRequired,
 };
 
 export default MediaRow;
