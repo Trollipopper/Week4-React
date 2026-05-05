@@ -1,29 +1,13 @@
 import {Link, Outlet} from 'react-router';
-import {useState, useEffect} from 'react';
+import {useEffect} from 'react';
+import {useUserContext} from '../hooks/contextHooks';
 
 const Layout = () => {
-  const [username, setUsername] = useState(null);
+  const {user, handleAutoLogin} = useUserContext();
 
   useEffect(() => {
-    const user = localStorage.getItem('username');
-    setUsername(user);
-  }, []);
-
-  useEffect(() => {
-    const handleLogout = () => {
-      setUsername(null);
-    };
-    window.addEventListener('logout', handleLogout);
-    return () => window.removeEventListener('logout', handleLogout);
-  }, []);
-
-  useEffect(() => {
-    const handleLogin = (e) => {
-      setUsername(e.detail.username);
-    };
-    window.addEventListener('login', handleLogin);
-    return () => window.removeEventListener('login', handleLogin);
-  }, []);
+    handleAutoLogin();
+  }, [handleAutoLogin]);
 
   return (
     <div>
@@ -53,20 +37,20 @@ const Layout = () => {
             <li>
               <Link to="/upload">Upload</Link>
             </li>
-            {!username && (
+            {!user && (
               <li>
                 <Link to="/login">Login</Link>
               </li>
             )}
-            {username && (
+            {user && (
               <li>
                 <Link to="/logout">Logout</Link>
               </li>
             )}
           </ul>
-          {username && (
+          {user && (
             <div style={{paddingRight: '1rem'}}>
-              Logged in as: <strong>{username}</strong>
+              Logged in as: <strong>{user.username}</strong>
             </div>
           )}
         </div>

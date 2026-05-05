@@ -1,23 +1,14 @@
 import React from 'react';
 import useForm from '../hooks/formHooks';
-import {useAuthentication} from '../hooks/apiHooks';
-import {useNavigate} from 'react-router';
+import {useUserContext} from '../hooks/contextHooks';
 
 const LoginForm = () => {
   const initValues = {username: '', password: ''};
-  const {postLogin} = useAuthentication();
-  const navigate = useNavigate();
+  const {handleLogin} = useUserContext();
 
   const doLogin = async (inputs) => {
     try {
-      const result = await postLogin(inputs);
-      console.log(result);
-      if (result && result.token) {
-        localStorage.setItem('token', result.token);
-        localStorage.setItem('username', inputs.username);
-        window.dispatchEvent(new CustomEvent('login', {detail: {username: inputs.username}}));
-        navigate('/', {replace: true});
-      }
+      await handleLogin(inputs);
     } catch (err) {
       console.error('Login error', err);
     }
