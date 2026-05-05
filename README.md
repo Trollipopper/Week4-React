@@ -13,6 +13,14 @@ This branch implements React Router for multi-page navigation:
 
 ## Building for Production
 
+Before building for production, update `vite.config.mjs` and replace `elmomal` with your Metropolia username:
+
+```javascript
+base: '/~elmomal/wsk-routing/',
+```
+
+Then build and deploy:
+
 ```bash
 npm run build
 ```
@@ -32,5 +40,4 @@ put dist/index.html
 put dist/assets/*
 exit
 ```
-
 Open [Deployed app](https://users.metropolia.fi/~elmomal/wsk-routing/) to view it in the browser.
