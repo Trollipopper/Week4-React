@@ -33,17 +33,27 @@ const Upload = () => {
       console.log('File uploaded:', fileResult);
 
       // Post media metadata to media API
-      const mediaResult = await postMedia(fileResult, inputs, token);
-      console.log('Media posted:', mediaResult);
+      try {
+        const mediaResult = await postMedia(fileResult, inputs, token);
+        console.log('Media posted:', mediaResult);
+      } catch (mediaErr) {
+        console.error('Media post failed:', mediaErr);
+        alert('File uploaded but failed to add metadata: ' + mediaErr.message);
+        return;
+      }
 
       // Redirect to home
       navigate('/', {replace: true});
     } catch (e) {
-      console.error('Upload error:', e.message);
+      console.error('Upload error:', e);
+      alert('Upload failed: ' + (e.message || JSON.stringify(e)));
     }
   };
 
-  const {inputs, handleInputChange, handleSubmit} = useForm(doUpload, initValues);
+  const {inputs, handleInputChange, handleSubmit} = useForm(
+    doUpload,
+    initValues
+  );
 
   return (
     <>

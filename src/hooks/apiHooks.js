@@ -20,7 +20,10 @@ export const useAuthentication = () => {
       },
       body: JSON.stringify(inputs),
     };
-    const loginResult = await fetchData(import.meta.env.VITE_AUTH_API + '/auth/login', fetchOptions);
+    const loginResult = await fetchData(
+      import.meta.env.VITE_AUTH_API + '/auth/login',
+      fetchOptions
+    );
     return loginResult;
   };
 
@@ -32,7 +35,10 @@ export const useUser = () => {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
-    const result = await fetchData(import.meta.env.VITE_AUTH_API + '/users/token', {method: 'GET', headers});
+    const result = await fetchData(
+      import.meta.env.VITE_AUTH_API + '/users/token',
+      {method: 'GET', headers}
+    );
     return result;
   };
 
@@ -44,7 +50,10 @@ export const useUser = () => {
       },
       body: JSON.stringify(inputs),
     };
-    const result = await fetchData(import.meta.env.VITE_AUTH_API + '/users', fetchOptions);
+    const result = await fetchData(
+      import.meta.env.VITE_AUTH_API + '/users',
+      fetchOptions
+    );
     return result;
   };
 
@@ -53,14 +62,16 @@ export const useUser = () => {
 
 export const useMedia = () => {
   const postMedia = async (file, inputs, token) => {
+    // file response contains: {data: {filename, media_type, filesize}, message}
+    const fileData = file.data || file;
     const mediaData = {
       title: inputs.title,
       description: inputs.description,
-      filename: file.filename,
-      filesize: file.filesize,
-      media_type: file.media_type,
-      mimetype: file.mimetype,
+      filename: fileData.filename,
+      filesize: fileData.filesize,
+      media_type: fileData.media_type,
     };
+    console.log('Posting media:', mediaData);
     const fetchOptions = {
       method: 'POST',
       headers: {
@@ -69,8 +80,16 @@ export const useMedia = () => {
       },
       body: JSON.stringify(mediaData),
     };
-    const result = await fetchData(import.meta.env.VITE_MEDIA_API + '/media', fetchOptions);
-    return result;
+    try {
+      const result = await fetchData(
+        import.meta.env.VITE_MEDIA_API + '/media',
+        fetchOptions
+      );
+      return result;
+    } catch (err) {
+      console.error('postMedia error:', err);
+      throw err;
+    }
   };
 
   return {postMedia};
@@ -87,7 +106,10 @@ export const useFile = () => {
       },
       body: formData,
     };
-    const result = await fetchData(import.meta.env.VITE_UPLOAD_SERVER + '/upload', fetchOptions);
+    const result = await fetchData(
+      import.meta.env.VITE_UPLOAD_SERVER + '/upload',
+      fetchOptions
+    );
     return result;
   };
 
