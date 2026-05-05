@@ -4,6 +4,8 @@ import Home from './views/Home';
 import Profile from './views/Profile';
 import Upload from './views/Upload';
 import Single from './views/Single';
+import Login from './views/Login';
+import Logout from './views/Logout';
 
 const App = () => {
   return (
@@ -12,6 +14,8 @@ const App = () => {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/single" element={<Single />} />
         </Route>
