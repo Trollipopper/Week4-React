@@ -21,6 +21,7 @@ const Single = () => {
     <div className="single-view-page">
       <button onClick={() => navigate(-1)}>Go back</button>
       <h3>{item.title}</h3>
+      <p>Owner: {item.username || 'unknown'}</p>
       <p>{item.description || 'No description provided.'}</p>
       <div className="single-view__media">
         {isVideo ? (

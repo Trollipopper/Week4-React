@@ -9,6 +9,7 @@ const MediaRow = ({item}) => {
       </td>
       <td>{item.title}</td>
       <td>{item.description || '-'}</td>
+      <td>{item.username || 'unknown'}</td>
       <td>{new Date(item.created_at).toLocaleString('fi-FI')}</td>
       <td>{item.filesize.toLocaleString()}</td>
       <td>{item.media_type}</td>
@@ -25,6 +26,7 @@ MediaRow.propTypes = {
   item: PropTypes.shape({
     media_id: PropTypes.number.isRequired,
     user_id: PropTypes.number,
+    username: PropTypes.string,
     filename: PropTypes.string,
     thumbnail: PropTypes.string,
     filesize: PropTypes.number,

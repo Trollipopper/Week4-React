@@ -15,6 +15,7 @@ const SingleView = ({item, setSelectedItem}) => {
           Close
         </button>
       </div>
+      <p>Owner: {item.username || 'unknown'}</p>
       <p>{item.description || 'No description provided.'}</p>
       <div className="single-view__media">
         {isVideo ? (
@@ -34,6 +35,7 @@ SingleView.propTypes = {
     media_type: PropTypes.string,
     title: PropTypes.string,
     description: PropTypes.string,
+    username: PropTypes.string,
   }),
   setSelectedItem: PropTypes.func.isRequired,
 };
