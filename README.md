@@ -1,40 +1,21 @@
-# Week 4 React - Routing and Hooks
+# Week 4 React — Forms branch
 
-This repository has two separate versions:
+This branch contains the Forms assignment. Build and upload this branch to your WebDisk to publish the app.
 
-- `routing` branch for the React Router assignment at `https://users.metropolia.fi/~elmomal/wsk-routing/`
-- `custom-hooks` branch for the hooks/API assignment at `https://users.metropolia.fi/~elmomal/custom-hooks/`
-
-## What goes where
-
-Each branch must be built and uploaded to its own remote folder.
-
-- `routing` branch build output goes to `~/public_html/wsk-routing/`
-- `custom-hooks` branch build output goes to `~/public_html/custom-hooks/`
-
-## Local test
-
-Run the dev server with:
+Local dev:
 
 ```bash
 npm run dev
 ```
 
-Open the URL Vite prints in the terminal. For the `custom-hooks` branch, the production build is configured with:
-
-```javascript
-base: '/~elmomal/custom-hooks/',
-```
-
-## Production build
+Production build:
 
 ```bash
 npm run build
 ```
 
-After the build, the `dist/` folder should contain `index.html` and an `assets/` folder. If the browser shows a 404 for CSS or JS, the usual cause is that only part of `dist/` was uploaded.
+After build, upload the contents of `dist/` to `public_html/forms/` on your WebDisk.
 
-## View links
+Published URL for this branch:
 
-- `custom-hooks`: [https://users.metropolia.fi/~elmomal/custom-hooks/](https://users.metropolia.fi/~elmomal/custom-hooks/)
-- `routing`: [https://users.metropolia.fi/~elmomal/wsk-routing/](https://users.metropolia.fi/~elmomal/wsk-routing/)
+- `forms`: https://users.metropolia.fi/~elmomal/forms/
