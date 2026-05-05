@@ -7,7 +7,7 @@ const Layout = () => {
 
   useEffect(() => {
     handleAutoLogin();
-  }, [handleAutoLogin]);
+  }, []);
 
   return (
     <div>

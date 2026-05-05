@@ -1,6 +1,6 @@
-import {createContext, useState} from 'react';
+import {createContext, useState, useCallback} from 'react';
 import {useAuthentication, useUser as useApiUser} from '../hooks/apiHooks';
-import {useNavigate, useLocation} from 'react-router';
+import {useNavigate} from 'react-router';
 
 const UserContext = createContext(null);
 
@@ -9,7 +9,6 @@ const UserProvider = ({children}) => {
   const {postLogin} = useAuthentication();
   const {getUserByToken} = useApiUser();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleLogin = async (credentials) => {
     try {
@@ -41,7 +40,7 @@ const UserProvider = ({children}) => {
     }
   };
 
-  const handleAutoLogin = async () => {
+  const handleAutoLogin = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       if (token) {
@@ -50,16 +49,16 @@ const UserProvider = ({children}) => {
         if (userResult.user && userResult.user.username) {
           localStorage.setItem('username', userResult.user.username);
         }
-        // navigate to current location to refresh protected views
-        navigate(location.pathname);
       }
     } catch (e) {
       console.error('handleAutoLogin error', e);
     }
-  };
+  }, [getUserByToken]);
 
   return (
-    <UserContext.Provider value={{user, setUser, handleLogin, handleLogout, handleAutoLogin}}>
+    <UserContext.Provider
+      value={{user, setUser, handleLogin, handleLogout, handleAutoLogin}}
+    >
       {children}
     </UserContext.Provider>
   );
