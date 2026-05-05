@@ -7,11 +7,17 @@ const Profile = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (!token) return;
+    console.log('Profile useEffect: token =', token);
+    if (!token) {
+      console.log('No token found');
+      return;
+    }
     const load = async () => {
       try {
+        console.log('Fetching user data...');
         const data = await getUserByToken(token);
-        setUser(data);
+        console.log('User data loaded:', data);
+        setUser(data.user);
       } catch (err) {
         console.error('Failed to load user', err);
       }

@@ -1,40 +1,25 @@
-# Week 4 React - Routing and Hooks
+# Week 4 React — Forms branch
 
-This repository has two separate versions:
+This branch contains the Forms assignment and related authentication hooks.
 
-- `routing` branch for the React Router assignment at `https://users.metropolia.fi/~elmomal/wsk-routing/`
-- `custom-hooks` branch for the hooks/API assignment at `https://users.metropolia.fi/~elmomal/custom-hooks/`
-
-## What goes where
-
-Each branch must be built and uploaded to its own remote folder.
-
-- `routing` branch build output goes to `~/public_html/wsk-routing/`
-- `custom-hooks` branch build output goes to `~/public_html/custom-hooks/`
-
-## Local test
-
-Run the dev server with:
+Local development
 
 ```bash
 npm run dev
 ```
 
-Open the URL Vite prints in the terminal. For the `custom-hooks` branch, the production build is configured with:
+Environment
 
-```javascript
-base: '/~elmomal/custom-hooks/',
-```
+- Ensure `VITE_AUTH_API` is set in your environment for auth requests (e.g. `https://media2.edu.metropolia.fi/auth-api/api/v1`).
 
-## Production build
+Production build
 
 ```bash
 npm run build
 ```
 
-After the build, the `dist/` folder should contain `index.html` and an `assets/` folder. If the browser shows a 404 for CSS or JS, the usual cause is that only part of `dist/` was uploaded.
+After the build, upload the entire `dist/` contents (both `index.html` and the `assets/` folder) to `public_html/forms/` on your WebDisk. Missing files or an incomplete upload causes 404s for JS/CSS.
 
-## View links
+Published URL for this branch:
 
-- `custom-hooks`: [https://users.metropolia.fi/~elmomal/custom-hooks/](https://users.metropolia.fi/~elmomal/custom-hooks/)
-- `routing`: [https://users.metropolia.fi/~elmomal/wsk-routing/](https://users.metropolia.fi/~elmomal/wsk-routing/)
+- `forms`: https://users.metropolia.fi/~elmomal/forms/

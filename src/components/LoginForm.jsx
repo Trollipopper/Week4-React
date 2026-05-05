@@ -14,6 +14,8 @@ const LoginForm = () => {
       console.log(result);
       if (result && result.token) {
         localStorage.setItem('token', result.token);
+        localStorage.setItem('username', inputs.username);
+        window.dispatchEvent(new CustomEvent('login', {detail: {username: inputs.username}}));
         navigate('/', {replace: true});
       }
     } catch (err) {
@@ -21,7 +23,10 @@ const LoginForm = () => {
     }
   };
 
-  const {inputs, handleInputChange, handleSubmit} = useForm(() => doLogin(inputs), initValues);
+  const {inputs, handleInputChange, handleSubmit} = useForm(
+    () => doLogin(inputs),
+    initValues
+  );
 
   return (
     <>
