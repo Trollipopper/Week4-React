@@ -2,11 +2,17 @@ import {useState, useEffect} from 'react';
 
 const fetchData = async (url, options = {}) => {
   try {
+    console.log('Fetching:', url, options);
     const res = await fetch(url, options);
+    console.log('Response status:', res.status);
     const data = await res.json();
-    if (!res.ok) throw data;
+    if (!res.ok) {
+      console.error('Response error:', res.status, data);
+      throw data;
+    }
     return data;
   } catch (err) {
+    console.error('Fetch error:', err);
     throw err;
   }
 };
