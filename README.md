@@ -1,6 +1,6 @@
-# Week 4 React — Forms branch
+# Week 4 React — Context assignment
 
-This branch contains the Forms assignment and related authentication hooks.
+This branch implements a shared `UserContext` for authentication state, protected routes, and related context hooks.
 
 Local development
 
@@ -18,8 +18,8 @@ Production build
 npm run build
 ```
 
-After the build, upload the entire `dist/` contents (both `index.html` and the `assets/` folder) to `public_html/forms/` on your WebDisk. Missing files or an incomplete upload causes 404s for JS/CSS.
+After the build, upload the entire `dist/` contents (both `index.html` and the `assets/` folder) to `public_html/context/` on your WebDisk. Missing files or an incomplete upload causes 404s for JS/CSS.
 
 Published URL for this branch:
 
-- `forms`: https://users.metropolia.fi/~elmomal/forms/
+- `context`: https://users.metropolia.fi/~elmomal/context/
