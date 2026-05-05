@@ -1,6 +1,5 @@
 # Week 4 React — Forms branch
-
-This branch contains the Forms assignment. Build and upload this branch to your WebDisk to publish the app.
+This branch is the `custom-hooks` deployment. Build and upload this branch to publish the app.
 
 Local dev:
 
@@ -14,8 +13,8 @@ Production build:
 npm run build
 ```
 
-After build, upload the contents of `dist/` to `public_html/forms/` on your WebDisk.
+After build, upload the contents of `dist/` to `public_html/custom-hooks/` on your WebDisk.
 
 Published URL for this branch:
 
-- `forms`: https://users.metropolia.fi/~elmomal/forms/
+- `custom-hooks`: https://users.metropolia.fi/~elmomal/custom-hooks/
