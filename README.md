@@ -3,14 +3,14 @@
 This repository has two separate versions:
 
 - `routing` branch for the React Router assignment at `https://users.metropolia.fi/~elmomal/wsk-routing/`
-- `hooks` branch for the hooks/API assignment at `https://users.metropolia.fi/~elmomal/hooks/`
+- `custom-hooks` branch for the hooks/API assignment at `https://users.metropolia.fi/~elmomal/custom-hooks/`
 
 ## What goes where
 
 Each branch must be built and uploaded to its own remote folder.
 
 - `routing` branch build output goes to `~/public_html/wsk-routing/`
-- `hooks` branch build output goes to `~/public_html/hooks/`
+- `custom-hooks` branch build output goes to `~/public_html/custom-hooks/`
 
 ## Local test
 
@@ -20,10 +20,10 @@ Run the dev server with:
 npm run dev
 ```
 
-Open the URL Vite prints in the terminal. For the `hooks` branch, the production build is configured with:
+Open the URL Vite prints in the terminal. For the `custom-hooks` branch, the production build is configured with:
 
 ```javascript
-base: '/~elmomal/hooks/',
+base: '/~elmomal/custom-hooks/',
 ```
 
 ## Production build
@@ -36,5 +36,5 @@ After the build, the `dist/` folder should contain `index.html` and an `assets/`
 
 ## View links
 
-- `hooks`: [https://users.metropolia.fi/~elmomal/hooks/](https://users.metropolia.fi/~elmomal/hooks/)
+- `custom-hooks`: [https://users.metropolia.fi/~elmomal/custom-hooks/](https://users.metropolia.fi/~elmomal/custom-hooks/)
 - `routing`: [https://users.metropolia.fi/~elmomal/wsk-routing/](https://users.metropolia.fi/~elmomal/wsk-routing/)
