@@ -1,6 +1,6 @@
-# Week 5 React — Context assignment
+# Week 4 React — Upload assignment
 
-This branch implements a shared `UserContext` for authentication state, protected routes, and related context hooks.
+This branch implements file upload functionality using FormData and integration with the file server and media API.
 
 Local development
 
@@ -10,7 +10,10 @@ npm run dev
 
 Environment
 
-- Ensure `VITE_AUTH_API` is set in your environment for auth requests (e.g. `https://media2.edu.metropolia.fi/auth-api/api/v1`).
+Ensure `.env.local` contains:
+- `VITE_AUTH_API=https://media2.edu.metropolia.fi/auth-api/api/v1`
+- `VITE_UPLOAD_SERVER=https://media2.edu.metropolia.fi/upload-api/api/v1`
+- `VITE_MEDIA_API=https://media2.edu.metropolia.fi/wsk-api/api/v1`
 
 Production build
 
@@ -18,8 +21,8 @@ Production build
 npm run build
 ```
 
-After the build, upload the entire `dist/` contents (both `index.html` and the `assets/` folder) to `public_html/context/` on your WebDisk. Missing files or an incomplete upload causes 404s for JS/CSS.
+After the build, upload the entire `dist/` contents (both `index.html` and the `assets/` folder) to `public_html/upload/` on your WebDisk. Missing files or an incomplete upload causes 404s for JS/CSS.
 
 Published URL for this branch:
 
-- `context`: https://users.metropolia.fi/~elmomal/context/
+- `upload`: https://users.metropolia.fi/~elmomal/upload/
