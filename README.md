@@ -1,37 +1,40 @@
-# Week 4 React - Routing Exercise
+# Week 4 React - Routing and Hooks
 
-This project implements React Router for multi-page navigation with the following views:
+This repository has two separate versions:
 
-- **Home**: Displays a media gallery with images and videos
-- **Profile**: User profile page
-- **Upload**: Media upload page
-- **Single**: Detailed view of a selected media item
+- `routing` branch for the React Router assignment at `https://users.metropolia.fi/~elmomal/wsk-routing/`
+- `hooks` branch for the hooks/API assignment at `https://users.metropolia.fi/~elmomal/hooks/`
 
-## Features
+## What goes where
 
-- React Router navigation between pages
-- Media gallery with thumbnail display
-- Full-size media viewer for images and videos
-- Browser back button support
+Each branch must be built and uploaded to its own remote folder.
 
-## Building for Production
+- `routing` branch build output goes to `~/public_html/wsk-routing/`
+- `hooks` branch build output goes to `~/public_html/hooks/`
 
-Before building for production, update `vite.config.mjs` and replace `elmomal` with your Metropolia username:
+## Local test
 
-```javascript
-base: '/~elmomal/wsk-routing/',
+Run the dev server with:
+
+```bash
+npm run dev
 ```
 
-Then build and deploy:
+Open the URL Vite prints in the terminal. For the `hooks` branch, the production build is configured with:
+
+```javascript
+base: '/~elmomal/hooks/',
+```
+
+## Production build
 
 ```bash
 npm run build
 ```
 
-Copy the contents of the `dist/` folder to your Metropolia public_html directory:
+After the build, the `dist/` folder should contain `index.html` and an `assets/` folder. If the browser shows a 404 for CSS or JS, the usual cause is that only part of `dist/` was uploaded.
 
-```bash
-scp -r dist/* elmomal@shell.metropolia.fi:~/public_html/wsk-routing/
-```
+## View links
 
-Open [Deployed app](https://users.metropolia.fi/~elmomal/wsk-routing/) to view it in the browser.
+- `hooks`: [https://users.metropolia.fi/~elmomal/hooks/](https://users.metropolia.fi/~elmomal/hooks/)
+- `routing`: [https://users.metropolia.fi/~elmomal/wsk-routing/](https://users.metropolia.fi/~elmomal/wsk-routing/)
