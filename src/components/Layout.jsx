@@ -7,49 +7,60 @@ const Layout = () => {
 
   useEffect(() => {
     handleAutoLogin();
-  }, []);
+  }, [handleAutoLogin]);
 
   return (
-    <div>
+    <div className="space-y-4">
       <nav>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
-          <ul
-            style={{
-              display: 'flex',
-              gap: '1rem',
-              listStyle: 'none',
-              margin: 0,
-              padding: 0,
-            }}
-          >
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <ul className="flex flex-wrap items-center gap-3 p-0 m-0 list-none *:list-none">
             <li>
-              <Link to="/">Home</Link>
+              <Link
+                to="/"
+                className="rounded-full px-3 py-2 text-sm font-semibold text-slate-900 transition hover:bg-slate-900/5 hover:text-sky-600"
+              >
+                Home
+              </Link>
             </li>
             <li>
-              <Link to="/profile">Profile</Link>
+              <Link
+                to="/profile"
+                className="rounded-full px-3 py-2 text-sm font-semibold text-slate-900 transition hover:bg-slate-900/5 hover:text-sky-600"
+              >
+                Profile
+              </Link>
             </li>
             <li>
-              <Link to="/upload">Upload</Link>
+              <Link
+                to="/upload"
+                className="rounded-full px-3 py-2 text-sm font-semibold text-slate-900 transition hover:bg-slate-900/5 hover:text-sky-600"
+              >
+                Upload
+              </Link>
             </li>
             {!user && (
               <li>
-                <Link to="/login">Login</Link>
+                <Link
+                  to="/login"
+                  className="rounded-full px-3 py-2 text-sm font-semibold text-slate-900 transition hover:bg-slate-900/5 hover:text-sky-600"
+                >
+                  Login
+                </Link>
               </li>
             )}
             {user && (
               <li>
-                <Link to="/logout">Logout</Link>
+                <Link
+                  to="/logout"
+                  className="rounded-full px-3 py-2 text-sm font-semibold text-slate-900 transition hover:bg-slate-900/5 hover:text-sky-600"
+                >
+                  Logout
+                </Link>
               </li>
             )}
           </ul>
           {user && (
-            <div style={{paddingRight: '1rem'}}>
+            <div className="rounded-full bg-white/70 px-4 py-2 text-sm text-slate-700 shadow-sm ring-1 ring-slate-200/70">
               Logged in as: <strong>{user.username}</strong>
             </div>
           )}

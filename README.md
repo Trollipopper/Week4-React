@@ -1,6 +1,6 @@
-# Week 4 React — Upload assignment
+# Week 4 React — Tailwind assignment
 
-This branch implements file upload functionality using FormData and integration with the file server and media API.
+This branch continues the upload exercise with Tailwind CSS and the API work used by the media views.
 
 Local development
 
@@ -22,8 +22,6 @@ Production build
 npm run build
 ```
 
-After the build, upload the entire `dist/` contents (both `index.html` and the `assets/` folder) to `public_html/upload/` on your WebDisk. Missing files or an incomplete upload causes 404s for JS/CSS.
+After the build, upload the entire `dist/` contents (both `index.html` and the `assets/` folder) to `public_html/tailwind/` on your WebDisk. Missing files or an incomplete upload causes 404s for JS/CSS.
 
-Published URL for this branch:
-
-- `upload`: https://users.metropolia.fi/~elmomal/upload/
+Open [https://users.metropolia.fi/~elmomal/tailwind/](https://users.metropolia.fi/~elmomal/tailwind/) to view it in the browser.

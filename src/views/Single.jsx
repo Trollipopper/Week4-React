@@ -1,13 +1,8 @@
 import {useEffect, useState} from 'react';
 import {useLocation, useNavigate, useParams} from 'react-router';
+import Likes from '../components/Likes';
 import {useUserContext} from '../hooks/contextHooks';
-import {
-  useComments,
-  useLikes,
-  useMedia,
-  useRatings,
-  useTags,
-} from '../hooks/apiHooks';
+import {useComments, useMedia, useRatings, useTags} from '../hooks/apiHooks';
 
 const Single = () => {
   const navigate = useNavigate();
@@ -15,16 +10,9 @@ const Single = () => {
   const {state} = useLocation();
   const initialItem = state?.item || null;
   const {user} = useUserContext();
-  const {getMediaById, updateMedia, deleteMedia} = useMedia();
+  const {getMediaById, modifyMedia, deleteMedia} = useMedia();
   const {getCommentsByMediaId, postComment, getCommentCountByMediaId} =
     useComments();
-  const {
-    getLikeCountByMediaId,
-    getLikesByMediaId,
-    checkUserLike,
-    likeMedia,
-    deleteLike,
-  } = useLikes();
   const {getAverageRating, getRatingsByMediaId, postRating} = useRatings();
   const {getTagsByMediaId, postTag, deleteTagFromMediaByTagName} = useTags();
 
@@ -33,9 +21,7 @@ const Single = () => {
   const [tags, setTags] = useState([]);
   const [ratings, setRatings] = useState([]);
   const [commentCount, setCommentCount] = useState(0);
-  const [likeCount, setLikeCount] = useState(0);
   const [averageRating, setAverageRating] = useState(null);
-  const [userLike, setUserLike] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [commentText, setCommentText] = useState('');
@@ -47,7 +33,6 @@ const Single = () => {
   );
 
   const token = localStorage.getItem('token');
-
   const isVideo = media?.media_type?.startsWith('video/');
 
   const loadMediaDetails = async (id) => {
@@ -65,30 +50,20 @@ const Single = () => {
       setEditTitle(mediaResult.title || '');
       setEditDescription(mediaResult.description || '');
 
-      const [
-        commentsResult,
-        countResult,
-        likesResult,
-        avgResult,
-        ratingsResult,
-        tagsResult,
-      ] = await Promise.allSettled([
-        getCommentsByMediaId(id),
-        getCommentCountByMediaId(id),
-        getLikeCountByMediaId(id),
-        getAverageRating(id),
-        getRatingsByMediaId(id),
-        getTagsByMediaId(id),
-      ]);
+      const [commentsResult, countResult, avgResult, ratingsResult, tagsResult] =
+        await Promise.allSettled([
+          getCommentsByMediaId(id),
+          getCommentCountByMediaId(id),
+          getAverageRating(id),
+          getRatingsByMediaId(id),
+          getTagsByMediaId(id),
+        ]);
 
       setComments(
         commentsResult.status === 'fulfilled' ? commentsResult.value : []
       );
       setCommentCount(
         countResult.status === 'fulfilled' ? countResult.value.count || 0 : 0
-      );
-      setLikeCount(
-        likesResult.status === 'fulfilled' ? likesResult.value.count || 0 : 0
       );
       setAverageRating(
         avgResult.status === 'fulfilled'
@@ -99,18 +74,6 @@ const Single = () => {
         ratingsResult.status === 'fulfilled' ? ratingsResult.value : []
       );
       setTags(tagsResult.status === 'fulfilled' ? tagsResult.value : []);
-
-      if (token) {
-        try {
-          const likeResult = await checkUserLike(id, token);
-          setUserLike(likeResult);
-        } catch (likeErr) {
-          setUserLike(null);
-          console.log('User has not liked this media yet', likeErr);
-        }
-      } else {
-        setUserLike(null);
-      }
     } catch (err) {
       console.error('Failed to load media details', err);
       setError(err?.message || 'Failed to load media details');
@@ -167,32 +130,18 @@ const Single = () => {
     await refreshAfterAction();
   };
 
-  const handleLikeToggle = async () => {
-    if (!token || !media?.media_id) {
-      return;
-    }
-
-    if (userLike?.like_id) {
-      await deleteLike(userLike.like_id, token);
-    } else {
-      await likeMedia({media_id: media.media_id}, token);
-    }
-
-    await refreshAfterAction();
-  };
-
   const handleMediaUpdate = async (evt) => {
     evt.preventDefault();
     if (!token || !media?.media_id) {
       return;
     }
 
-    await updateMedia(
+    await modifyMedia(
       media.media_id,
       {title: editTitle, description: editDescription},
       token
     );
-    await refreshAfterAction();
+    navigate(0);
   };
 
   const handleDeleteMedia = async () => {
@@ -219,9 +168,7 @@ const Single = () => {
   };
 
   const isOwner = Boolean(
-    user &&
-    media &&
-    (user.user_id === media.user_id || user.id === media.user_id)
+    user && media && (user.user_id === media.user_id || user.id === media.user_id)
   );
 
   if (loading) {
@@ -262,7 +209,6 @@ const Single = () => {
           <p>{media.description || 'No description provided.'}</p>
         </div>
         <div className="detail-stats">
-          <span>{likeCount} likes</span>
           <span>{commentCount} comments</span>
           <span>
             {averageRating
@@ -281,11 +227,9 @@ const Single = () => {
       </div>
 
       <section className="detail-actions">
-        {token ? (
-          <>
-            <button type="button" onClick={handleLikeToggle}>
-              {userLike?.like_id ? 'Unlike' : 'Like'}
-            </button>
+        <div className="grid gap-4">
+          <Likes mediaId={media.media_id} />
+          {token ? (
             <form onSubmit={handleRatingSubmit} className="inline-form">
               <label htmlFor="ratingValue">Rate</label>
               <select
@@ -302,10 +246,10 @@ const Single = () => {
               </select>
               <button type="submit">Save rating</button>
             </form>
-          </>
-        ) : (
-          <p>Log in to like, rate, comment, and tag media.</p>
-        )}
+          ) : (
+            <p>Log in to like, rate, comment, and tag media.</p>
+          )}
+        </div>
       </section>
 
       <section>

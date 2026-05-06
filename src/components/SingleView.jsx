@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import Likes from './Likes';
 
 const SingleView = ({item, setSelectedItem}) => {
   if (!item) {
@@ -22,6 +23,9 @@ const SingleView = ({item, setSelectedItem}) => {
         ) : (
           <img src={item.filename} alt={item.title} />
         )}
+      </div>
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
+        <Likes mediaId={item.media_id} />
       </div>
     </dialog>
   );
