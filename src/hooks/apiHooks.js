@@ -28,6 +28,11 @@ export const useAuthentication = () => {
 };
 
 export const useUser = () => {
+  const getUserById = async (id) => {
+    const result = await fetchData(import.meta.env.VITE_AUTH_API + '/users/' + id);
+    return result;
+  };
+
   const getUserByToken = async (token) => {
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -48,7 +53,16 @@ export const useUser = () => {
     return result;
   };
 
-  return {getUserByToken, postUser};
+  return {getUserById, getUserByToken, postUser};
+};
+
+export const useMedia = () => {
+  const getMediaList = async () => {
+    const result = await fetchData(import.meta.env.VITE_MEDIA_API + '/media');
+    return result;
+  };
+
+  return {getMediaList};
 };
 
 export default fetchData;
