@@ -1,11 +1,7 @@
 const fetchData = async (url, options = {}) => {
   try {
     console.log('Fetching:', url, options);
-    const fetchOptions = {
-      ...options,
-      credentials: 'include',
-    };
-    const res = await fetch(url, fetchOptions);
+    const res = await fetch(url, options);
     console.log('Response status:', res.status);
     const data = await res.json();
     if (!res.ok) {
@@ -53,6 +49,13 @@ export const useAuthentication = () => {
 };
 
 export const useUser = () => {
+  const getUserById = async (id) => {
+    const result = await fetchData(
+      import.meta.env.VITE_AUTH_API + '/users/' + id
+    );
+    return result;
+  };
+
   const getUserByToken = async (token) => {
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -79,14 +82,12 @@ export const useUser = () => {
     return result;
   };
 
-  return {getUserByToken, postUser};
+  return {getUserById, getUserByToken, postUser};
 };
 
 export const useMedia = () => {
-  const getMediaList = async (page = 1, limit = 10) => {
-    return fetchData(
-      `${import.meta.env.VITE_MEDIA_API}/media?page=${page}&limit=${limit}`
-    );
+  const getMediaList = async () => {
+    return fetchData(`${import.meta.env.VITE_MEDIA_API}/media`);
   };
 
   const getMediaById = async (id) => {

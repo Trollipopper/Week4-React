@@ -14,7 +14,7 @@ Ensure `.env.local` contains:
 
 - `VITE_AUTH_API=https://media2.edu.metropolia.fi/auth-api/api/v1`
 - `VITE_UPLOAD_SERVER=https://media2.edu.metropolia.fi/upload-api/api/v1`
-- `VITE_MEDIA_API=https://media2.edu.metropolia.fi/wsk-api/api/v1`
+- `VITE_MEDIA_API=https://media2.edu.metropolia.fi/media-api/api/v1`
 
 Production build
 

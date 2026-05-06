@@ -1,21 +1,33 @@
 import {useEffect, useState} from 'react';
 import MediaRow from '../components/MediaRow';
 import {useMedia} from '../hooks/apiHooks';
+import {useUser} from '../hooks/apiHooks';
 
 const Home = () => {
   const [mediaArray, setMediaArray] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const {getMediaList} = useMedia();
+  const {getUserById} = useUser();
 
   useEffect(() => {
     const loadMedia = async () => {
       try {
         setLoading(true);
         setError('');
-        const result = await getMediaList(1, 20);
+        const result = await getMediaList();
         const list = Array.isArray(result) ? result : result?.media || [];
-        setMediaArray(list);
+        const mediaWithUsers = await Promise.all(
+          list.map(async (item) => {
+            try {
+              const user = await getUserById(item.user_id);
+              return {...item, username: user.username};
+            } catch {
+              return {...item, username: 'unknown'};
+            }
+          })
+        );
+        setMediaArray(mediaWithUsers);
       } catch (err) {
         console.error('API Error:', err);
         // Fallback: Load from local test.json if API fails (e.g., CORS)
@@ -55,6 +67,7 @@ const Home = () => {
             <th>Thumbnail</th>
             <th>Title</th>
             <th>Description</th>
+            <th>Owner</th>
             <th>Created</th>
             <th>Size</th>
             <th>Type</th>
