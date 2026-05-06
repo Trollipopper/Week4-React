@@ -27,6 +27,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/upload" element={<Upload />} />
+            <Route path="/single/:mediaId" element={<Single />} />
             <Route path="/single" element={<Single />} />
           </Route>
         </Routes>

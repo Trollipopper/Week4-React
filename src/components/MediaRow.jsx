@@ -13,7 +13,7 @@ const MediaRow = ({item}) => {
       <td>{item.filesize.toLocaleString()}</td>
       <td>{item.media_type}</td>
       <td>
-        <Link to="/single" state={{item}}>
+        <Link to={`/single/${item.media_id}`} state={{item}}>
           View
         </Link>
       </td>

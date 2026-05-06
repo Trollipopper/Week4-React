@@ -2,14 +2,12 @@ import {useState} from 'react';
 import useForm from '../hooks/formHooks';
 import {useFile} from '../hooks/apiHooks';
 import {useMedia} from '../hooks/apiHooks';
-import {useUserContext} from '../hooks/contextHooks';
 import {useNavigate} from 'react-router';
 
 const Upload = () => {
   const [file, setFile] = useState(null);
   const {postFile} = useFile();
   const {postMedia} = useMedia();
-  const {user} = useUserContext();
   const navigate = useNavigate();
 
   const initValues = {title: '', description: ''};
@@ -36,6 +34,12 @@ const Upload = () => {
       try {
         const mediaResult = await postMedia(fileResult, inputs, token);
         console.log('Media posted:', mediaResult);
+        const createdMediaId =
+          mediaResult?.media?.media_id || mediaResult?.media_id;
+        if (createdMediaId) {
+          navigate(`/single/${createdMediaId}`, {replace: true});
+          return;
+        }
       } catch (mediaErr) {
         console.error('Media post failed:', mediaErr);
         alert('File uploaded but failed to add metadata: ' + mediaErr.message);
