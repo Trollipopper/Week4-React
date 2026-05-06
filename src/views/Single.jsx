@@ -45,7 +45,7 @@ const Single = () => {
     try {
       setLoading(true);
       setError('');
-      const mediaResult = initialItem || (await getMediaById(id));
+      const mediaResult = await getMediaById(id);
       setMedia(mediaResult);
       setEditTitle(mediaResult.title || '');
       setEditDescription(mediaResult.description || '');

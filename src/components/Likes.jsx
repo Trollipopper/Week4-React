@@ -35,6 +35,10 @@ const Likes = ({mediaId}) => {
       const likeResult = await getLikeByUser(mediaId, token);
       setUserLike(likeResult);
     } catch (err) {
+      if (err?.message === 'No likes found' || err?.status === 404) {
+        setUserLike(null);
+        return;
+      }
       setUserLike(null);
     }
   };
