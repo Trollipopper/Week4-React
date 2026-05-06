@@ -50,14 +50,19 @@ const Single = () => {
       setEditTitle(mediaResult.title || '');
       setEditDescription(mediaResult.description || '');
 
-      const [commentsResult, countResult, avgResult, ratingsResult, tagsResult] =
-        await Promise.allSettled([
-          getCommentsByMediaId(id),
-          getCommentCountByMediaId(id),
-          getAverageRating(id),
-          getRatingsByMediaId(id),
-          getTagsByMediaId(id),
-        ]);
+      const [
+        commentsResult,
+        countResult,
+        avgResult,
+        ratingsResult,
+        tagsResult,
+      ] = await Promise.allSettled([
+        getCommentsByMediaId(id),
+        getCommentCountByMediaId(id),
+        getAverageRating(id),
+        getRatingsByMediaId(id),
+        getTagsByMediaId(id),
+      ]);
 
       setComments(
         commentsResult.status === 'fulfilled' ? commentsResult.value : []
@@ -136,12 +141,17 @@ const Single = () => {
       return;
     }
 
-    await modifyMedia(
-      media.media_id,
-      {title: editTitle, description: editDescription},
-      token
-    );
-    navigate(0);
+    try {
+      await modifyMedia(
+        media.media_id,
+        {title: editTitle, description: editDescription},
+        token
+      );
+      navigate(0);
+    } catch (err) {
+      console.error('Update failed:', err);
+      alert('Failed to update media: ' + (err?.message || 'Unknown error'));
+    }
   };
 
   const handleDeleteMedia = async () => {
@@ -154,8 +164,13 @@ const Single = () => {
       return;
     }
 
-    await deleteMedia(media.media_id, token);
-    navigate('/', {replace: true});
+    try {
+      await deleteMedia(media.media_id, token);
+      navigate('/', {replace: true});
+    } catch (err) {
+      console.error('Delete failed:', err);
+      alert('Failed to delete media: ' + (err?.message || 'Unknown error'));
+    }
   };
 
   const handleRemoveTag = async (tag) => {
@@ -168,7 +183,9 @@ const Single = () => {
   };
 
   const isOwner = Boolean(
-    user && media && (user.user_id === media.user_id || user.id === media.user_id)
+    user &&
+    media &&
+    (user.user_id === media.user_id || user.id === media.user_id)
   );
 
   if (loading) {

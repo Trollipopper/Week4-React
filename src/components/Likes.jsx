@@ -5,7 +5,8 @@ import {useUserContext} from '../hooks/contextHooks';
 
 const Likes = ({mediaId}) => {
   const {user} = useUserContext();
-  const {getLikeCountByMediaId, getLikeByUser, postLike, deleteLike} = useLike();
+  const {getLikeCountByMediaId, getLikeByUser, postLike, deleteLike} =
+    useLike();
   const [likeCount, setLikeCount] = useState(0);
   const [userLike, setUserLike] = useState(null);
   const token = localStorage.getItem('token');
@@ -40,7 +41,7 @@ const Likes = ({mediaId}) => {
 
   useEffect(() => {
     loadLikes();
-  }, [mediaId, token, user?.user_id, user?.id, user?.role]);
+  }, [mediaId, token]);
 
   const handleLikeToggle = async () => {
     if (!token || !mediaId) {
@@ -70,7 +71,9 @@ const Likes = ({mediaId}) => {
           {userLike?.like_id ? 'Unlike' : 'Like'}
         </button>
       ) : (
-        <span className="text-sm text-slate-500">Log in to like this media.</span>
+        <span className="text-sm text-slate-500">
+          Log in to like this media.
+        </span>
       )}
     </div>
   );
