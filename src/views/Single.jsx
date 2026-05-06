@@ -147,7 +147,7 @@ const Single = () => {
         {title: editTitle, description: editDescription},
         token
       );
-      navigate(0);
+      await refreshAfterAction();
     } catch (err) {
       console.error('Update failed:', err);
       alert('Failed to update media: ' + (err?.message || 'Unknown error'));
